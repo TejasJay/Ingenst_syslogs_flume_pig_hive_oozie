@@ -1,0 +1,44 @@
+<workflow-app name="etl-workflow" xmlns="uri:oozie:workflow:0.5">
+    <start to="flume-action"/>
+
+    <action name="flume-action">
+        <shell>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <exec>/usr/local/flume/bin/flume-ng</exec>
+            <arg>agent</arg>
+            <arg>--conf-file</arg>
+            <arg>/usr/local/flume/conf/flume-hdfs.conf</arg>
+            <arg>--name</arg>
+            <arg>agent</arg>
+        </shell>
+        <ok to="pig-action"/>
+        <error to="fail"/>
+    </action>
+
+    <action name="pig-action">
+        <pig>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <script>/usr/local/pig/scripts/process_logs.pig</script>
+        </pig>
+        <ok to="hive-action"/>
+        <error to="fail"/>
+    </action>
+
+    <action name="hive-action">
+        <hive>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <script>/usr/local/hive/scripts/store_logs.hql</script>
+        </hive>
+        <ok to="end"/>
+        <error to="fail"/>
+    </action>
+
+    <kill name="fail">
+        <message>ETL workflow failed</message>
+    </kill>
+
+    <end name="end"/>
+</workflow-app>

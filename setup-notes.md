@@ -1,6 +1,5 @@
 # Installation, Setup & Notes 
 
-### **📒 In-Depth Notes on Apache HBase**
 
 ---
 

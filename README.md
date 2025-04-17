@@ -6,7 +6,7 @@ This project **automates data ingestion, transformation, storage, and scheduling
 ✅ **Oozie** – Automates & schedules ETL workflow
 ✅ **Shell Scripts** – Manages pipeline execution
 
-* * * *
+* * * 
 
 ## **📌 1️⃣ Project Setup**
 

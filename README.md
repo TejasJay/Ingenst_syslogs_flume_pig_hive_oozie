@@ -196,7 +196,7 @@ oozie job -oozie http://localhost:11000/oozie -config /usr/local/oozie/conf/job.
 
 ✅ **The pipeline now runs end-to-end on Oozie!** 🚀
 
-* * **
+* * *
 
 ## **📌 6️⃣ Automate with Shell Script**
 
